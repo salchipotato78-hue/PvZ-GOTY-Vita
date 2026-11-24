@@ -24,6 +24,7 @@
 
 #include <cstdint>
 #include "../Resources.h"
+#include "sound/SoundInstance.h"
 #ifndef __vita__
 #include "sound/SDLSoundInstance.h"
 #endif
