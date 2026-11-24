@@ -269,7 +269,7 @@ elseif (VITA)
 		SceDisplay_stub SceGxm_stub SceCtrl_stub SceTouch_stub
 		SceAudio_stub SceAudioIn_stub SceAppMgr_stub SceSysmodule_stub
 		SceCommonDialog_stub SceLibKernel_stub SceNet_stub SceNetCtl_stub
-		SceIme_stub SceVshBridge_stub SceDmac_stub SceShaccCg_stub shark mathneon m
+		SceIme_stub SceVshBridge_stub SceDmacMgr_stub SceShaccCg_stub shark mathneon m
 	)
 	vita_create_self(pvz-portable.self pvz-portable UNSAFE)
 	# Title ID: 9 characters. Bubble name is the TITLE in param.sfo.

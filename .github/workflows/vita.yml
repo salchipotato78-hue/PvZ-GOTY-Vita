@@ -13,6 +13,14 @@ jobs:
       with:
         fetch-depth: 0
 
+    - name: Diagnose VitaSDK libraries
+      run: |
+        echo "== VitaSDK libs matching shark/dmac/shacc/mathneon/vitagl =="
+        ls "$VITASDK/arm-vita-eabi/lib" | grep -iE "shark|dmac|shacc|mathneon|vitagl" || echo "(none)"
+        echo "== installed VitaSDK packages =="
+        (vdpm list 2>/dev/null || ls "$VITASDK/share" || true) | head -200
+      continue-on-error: true
+
     - name: Build PvZ-Portable (Vita)
       run: |
         cmake -B build -DVITA=ON \
