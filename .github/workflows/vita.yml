@@ -1,0 +1,32 @@
+name: Build for PS Vita
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-vita:
+    name: Build VPK (PS Vita)
+    runs-on: ubuntu-latest
+    container: vitasdk/vitasdk:latest # VERIFY the image tag before relying on it
+    steps:
+    - uses: actions/checkout@v6
+      with:
+        fetch-depth: 0
+
+    - name: Build PvZ-Portable (Vita)
+      run: |
+        cmake -B build -DVITA=ON \
+          -DCMAKE_TOOLCHAIN_FILE=$VITASDK/share/vita.toolchain.cmake \
+          -DCMAKE_BUILD_TYPE=Release -DLOW_MEMORY=ON
+        cmake --build build -j"$(nproc)"
+
+    - name: Collect VPK
+      run: |
+        mkdir -p dist
+        cp build/pvz-portable.vpk dist/
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v7
+      with:
+        name: pvz-portable-vita
+        path: dist/

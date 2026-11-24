@@ -1,0 +1,10 @@
+{
+  "dependencies": [
+    "libjpeg-turbo",
+    "libopenmpt",
+    "libpng",
+    "sdl3",
+    "sdl3-mixer",
+    "zlib"
+  ]
+}
