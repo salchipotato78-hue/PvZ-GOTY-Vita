@@ -186,11 +186,16 @@ if (LOW_MEMORY)
 	target_compile_definitions(pvz-portable PRIVATE LOW_MEMORY)
 endif()
 
-target_link_libraries(pvz-portable PRIVATE
-	${PVZP_SDL3_TARGET}
-	${PVZP_SDL3_MIXER_TARGET}
-	${OPENMPT_LIB}
-)
+if(VITA)
+	# SDL3 is not available on Vita; the VITA branch below links its own libraries.
+	target_link_libraries(pvz-portable PRIVATE ${OPENMPT_LIB})
+else()
+	target_link_libraries(pvz-portable PRIVATE
+		${PVZP_SDL3_TARGET}
+		${PVZP_SDL3_MIXER_TARGET}
+		${OPENMPT_LIB}
+	)
+endif()
 
 if(EMSCRIPTEN)
 	set_property(TARGET pvz-portable APPEND PROPERTY LINK_DEPENDS
