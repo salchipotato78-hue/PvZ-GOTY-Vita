@@ -248,6 +248,10 @@ if (WIN32)
 		endif()
 	endif()
 elseif (VITA)
+	# vita_create_self / vita_create_vpk come from the VitaSDK CMake helpers.
+	if(NOT COMMAND vita_create_vpk)
+		include("$ENV{VITASDK}/share/vita.cmake")
+	endif()
 	# vitaGL + Vita system stubs. Audio backend is still pending (no SDL3 on Vita).
 	target_link_libraries(pvz-portable PRIVATE
 		vitaGL
