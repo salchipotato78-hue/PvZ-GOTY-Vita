@@ -51,6 +51,11 @@ file(GLOB SOURCES CONFIGURE_DEPENDS
 	src/Lawn/System/*.cpp
 )
 
+if(VITA)
+	# SDL-based sound and music are replaced by NullSoundManager / DummyMusicInterface on Vita.
+	list(FILTER SOURCES EXCLUDE REGEX "sound/(SDLMusicInterface|SDLSoundManager|SDLSoundInstance|OpenMptMusic)\\.cpp$")
+endif()
+
 option(LOW_MEMORY "Enable low memory mode" OFF)
 if(VCPKG_TOOLCHAIN)
 	find_package(libopenmpt CONFIG REQUIRED)
