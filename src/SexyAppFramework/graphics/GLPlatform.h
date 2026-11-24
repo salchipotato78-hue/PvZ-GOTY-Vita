@@ -23,7 +23,7 @@
 #define __GLPLATFORM_H__
 
 #ifdef __vita__
-#include <vitaGL.h>
+#include "../platform/vita/VitaGLShim.h"
 #endif
 
 #ifdef __SWITCH__

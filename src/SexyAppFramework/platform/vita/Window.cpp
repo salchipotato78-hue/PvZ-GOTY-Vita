@@ -3,7 +3,7 @@
  * PS Vita window layer (vitaGL). Mirrors platform/switch/Window.cpp.
  * UNTESTED: first draft, pending compilation against VitaSDK.
  */
-#include <vitaGL.h>
+#include "VitaGLShim.h"
 
 #include "SexyAppBase.h"
 #include "graphics/GLInterface.h"
