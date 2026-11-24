@@ -65,14 +65,20 @@
 #include "graphics/MemoryImage.h"
 #include "widget/Dialog.h"
 #include "imagelib/ImageLib.h"
+#if defined(__vita__)
+#include "sound/NullSoundManager.h"
+#else
 #include "sound/SDLSoundManager.h"
 #include "sound/SDLSoundInstance.h"
+#endif
 #include "misc/Rect.h"
 #include "misc/PropertiesParser.h"
 #include "misc/PerfTimer.h"
 #include "misc/MTRand.h"
 #include "misc/ResourceManager.h"
+#ifndef __vita__
 #include "sound/SDLMusicInterface.h"
+#endif
 #include <mutex>
 #include "misc/Debug.h"
 #include "paklib/PakInterface.h"
@@ -3289,10 +3295,14 @@ bool SexyAppBase::ChangeDirHook([[maybe_unused]] const char *theIntendedPath)
 
 MusicInterface* SexyAppBase::CreateMusicInterface()
 {
+#ifdef __vita__
+	return new DummyMusicInterface(); // no music backend on Vita yet
+#else
 	if (mNoSoundNeeded)
 		return new DummyMusicInterface();
 	else
 		return new SDLMusicInterface(static_cast<SDLSoundManager*>(mSoundManager.get()));
+#endif
 }
 
 void SexyAppBase::InitPropertiesHook()
@@ -3437,7 +3447,11 @@ void SexyAppBase::Init()
 	}
 
 	if (mSoundManager == nullptr)
+#ifdef __vita__
+		mSoundManager = std::make_unique<NullSoundManager>();
+#else
 		mSoundManager = std::make_unique<SDLSoundManager>();
+#endif
 
 	SetSfxVolume(mSfxVolume);
 

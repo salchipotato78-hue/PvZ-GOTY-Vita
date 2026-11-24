@@ -148,6 +148,7 @@ FoleyTypeData::FoleyTypeData()
 	mLastVariationPlayed = -1;
 }
 
+#ifndef __vita__
 int PvzpDSoundInstance::GetSoundPosition()
 {
 	return 0;
@@ -156,6 +157,7 @@ int PvzpDSoundInstance::GetSoundPosition()
 void PvzpDSoundInstance::SetSoundPosition(int thePosition)
 {
 }
+#endif
 
 void PvzpFoleyInitialize(const FoleyParams* theFoleyParamArray, int theFoleyParamArraySize)
 {
@@ -338,7 +340,7 @@ void PvzpFoley::GamePause(bool theEnteringPause)
 				FoleyInstance* aFoleyInstance = &aFoleyData->mFoleyInstances[i];
 				if (aFoleyInstance->mRefCount != 0)
 				{
-					PvzpDSoundInstance* aSoundInstance = (PvzpDSoundInstance*)aFoleyInstance->mInstance;
+					SoundInstance* aSoundInstance = aFoleyInstance->mInstance;
 					if (theEnteringPause)
 					{
 						aFoleyInstance->mPaused = true;

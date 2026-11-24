@@ -24,7 +24,9 @@
 
 #include <cstdint>
 #include "../Resources.h"
+#ifndef __vita__
 #include "sound/SDLSoundInstance.h"
+#endif
 using namespace Sexy;
 
 constexpr const int MAX_FOLEY_TYPES = 110;
@@ -170,6 +172,7 @@ extern const FoleyParams gLawnFoleyParamArray[static_cast<int>(FoleyType::NUM_FO
 
 // Foley sound declarations
 
+#ifndef __vita__
 class PvzpDSoundInstance : public SDLSoundInstance
 {
 	friend class PvzpFoley;
@@ -180,6 +183,7 @@ public:
 	int      GetSoundPosition();
 	void     SetSoundPosition(int thePosition);
 };
+#endif
 
 class FoleyInstance
 {
