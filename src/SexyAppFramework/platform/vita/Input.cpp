@@ -15,10 +15,17 @@
 using namespace Sexy;
 
 // Vita button bit -> framework key
+// D-pad drives menus, the Almanac and the achievements screen; without it those
+// screens cannot be navigated with buttons.
 static const std::unordered_map<unsigned int, KeyCode> sKeyMaps = {
 	{SCE_CTRL_START,    KEYCODE_ESCAPE},
+	{SCE_CTRL_CIRCLE,   KEYCODE_ESCAPE},  // back / cancel
 	{SCE_CTRL_SELECT,   KEYCODE_SPACE},
 	{SCE_CTRL_CROSS,    KEYCODE_RETURN},
+	{SCE_CTRL_UP,       KEYCODE_UP},
+	{SCE_CTRL_DOWN,     KEYCODE_DOWN},
+	{SCE_CTRL_LEFT,     KEYCODE_LEFT},
+	{SCE_CTRL_RIGHT,    KEYCODE_RIGHT},
 	{SCE_CTRL_L1,       KEYCODE_LBUTTON},
 	{SCE_CTRL_R1,       KEYCODE_RBUTTON},
 };

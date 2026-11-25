@@ -9,6 +9,7 @@
 
 #include <SDL3/SDL.h>
 
+#include <psp2/io/stat.h>
 #include <psp2/kernel/processmgr.h>
 #include <psp2/kernel/threadmgr.h>
 
@@ -83,6 +84,12 @@ const char* SDL_GetBasePath(void)
 
 char* SDL_GetPrefPath(const char*, const char*)
 {
+	// The Vita does not create this folder for us, and saves fail silently
+	// without it. sceIoMkdir fails with EEXIST when the folder already exists,
+	// which is fine to ignore.
+	sceIoMkdir("ux0:data", 0777);
+	sceIoMkdir("ux0:data/PvZ", 0777);
+
 	char* path = static_cast<char*>(malloc(sizeof("ux0:data/PvZ/")));
 	if (path)
 		strcpy(path, "ux0:data/PvZ/");
